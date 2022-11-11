@@ -5,6 +5,8 @@ import { RouterView } from "vue-router";
 <template>
   <header>
     <div class="wrapper">
+      <h1 class="text-primary">My Dashboard</h1>
+
       <!-- <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
@@ -17,9 +19,7 @@ import { RouterView } from "vue-router";
 
 <style scoped lang="scss">
 .wrapper {
-  h1 {
-    color: red;
-  }
+
 }
 
 @media (min-width: 1024px) {
