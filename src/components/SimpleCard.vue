@@ -1,9 +1,9 @@
 <script setup></script>
 
 <template>
-  <div class="card bg-secondary bg-gradient p-3" style="width: 18rem">
+  <div class="card bg-secondary bg-gradient p-1">
     <div class="card-body">
-      <h5 class="card-title ">Card title</h5>
+      <h5 class="card-title">Card title</h5>
       <p class="card-text">
         Some quick example text to build on the card title and make up the bulk
         of the card's content.
@@ -14,3 +14,9 @@
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.card {
+  // max-width: 250px;
+}
+</style>
