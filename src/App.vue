@@ -1,10 +1,14 @@
 <script setup>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { RouterView } from "vue-router";
 import { useStore } from "vuex";
 
 const store = useStore();
 const loading = computed(() => store.state.loading);
+
+onMounted(() => {
+  store.dispatch("getPosts");
+});
 </script>
 
 <template>

@@ -1,5 +1,10 @@
 <script setup>
+import { computed } from "vue";
+import { useStore } from "vuex";
 import SimpleCard from "@/components/SimpleCard.vue";
+
+const store = useStore();
+const posts = computed(() => store.getters.loadPostList);
 </script>
 
 <template>
@@ -8,7 +13,7 @@ import SimpleCard from "@/components/SimpleCard.vue";
       <div class="row mb-3">
         <h4 class="secondary">Latest Posts</h4>
         <div class="cards-container">
-          <SimpleCard v-for="index in 4" :key="index" />
+          <SimpleCard v-for="(post, index) in posts" :key="index" />
         </div>
         <div class="row">
           <nav
