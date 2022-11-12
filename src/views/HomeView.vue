@@ -13,7 +13,14 @@ const posts = computed(() => store.getters.loadPostList);
       <div class="row mb-3">
         <h4 class="secondary">Latest Posts</h4>
         <div class="cards-container">
-          <SimpleCard v-for="(post, index) in posts" :key="index" />
+          <SimpleCard
+            v-for="post in posts"
+            :key="post.id"
+            :id="post.id"
+            :user_id="post.user_id"
+            :title="post.title"
+            :body="post.body"
+          />
         </div>
         <div class="row">
           <nav
@@ -65,7 +72,7 @@ const posts = computed(() => store.getters.loadPostList);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-	gap: 1.2rem;
+  gap: 1.2rem;
 }
 
 @media (min-width: 760px) {
