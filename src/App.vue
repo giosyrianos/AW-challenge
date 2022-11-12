@@ -12,20 +12,21 @@ onMounted(() => {
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <h1 class="text-info">My Dashboard</h1>
-      <div v-if="loading" class="spinner-border text-info" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <!-- <nav>
+  <div>
+    <header>
+      <div class="wrapper">
+        <h1 class="text-info">My Dashboard</h1>
+        <div v-if="loading" class="spinner-border text-info" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <!-- <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav> -->
-    </div>
-  </header>
-  <div class="container"></div>
-  <RouterView v-if="!loading" />
+      </div>
+    </header>
+    <RouterView v-if="!loading" style="min-height: 75vh" />
+  </div>
 </template>
 
 <style scoped lang="scss">
