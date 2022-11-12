@@ -8,6 +8,7 @@ const store = createStore({
       postList: [],
       selectedPost: {},
       loading: false,
+      singlePostloading: false,
     };
   },
 
@@ -20,9 +21,9 @@ const store = createStore({
     },
 
     async getPost({ commit }, id) {
-      // commit("SET_LOADING", true);
+      commit("SET_Single_LOADING", true);
       const response = await PostDataService.getSinglePost(id);
-      // commit("SET_LOADING", false);
+      commit("SET_Single_LOADING", false);
       console.log(response.data);
       commit("SET_SELECTED_POST", response.data);
     },
@@ -31,6 +32,9 @@ const store = createStore({
   mutations: {
     SET_LOADING(state, payload) {
       state.loading = payload;
+    },
+    SET_Single_LOADING(state, payload) {
+      state.singlePostloading = payload;
     },
     SET_POSTLIST(state, postList) {
       state.postList = postList;
@@ -41,8 +45,8 @@ const store = createStore({
   },
 
   getters: {
-		loadPostList: (state) => state.postList,
-		loadSelectedPost: (state) => state.selectedPost,
+    loadPostList: (state) => state.postList,
+    loadSelectedPost: (state) => state.selectedPost,
   },
 });
 

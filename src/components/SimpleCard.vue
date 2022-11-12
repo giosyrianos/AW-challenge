@@ -49,9 +49,9 @@ onMounted(() => {
         {{ body }}
       </p>
       <div class="actions d-flex justify-content-end">
-        <a href="#" class="btn btn-info shadow" @click="onSelection()"
-          >Read More</a
-        >
+        <button href="#" class="btn btn-info shadow" @click="onSelection()">
+          Read More
+        </button>
         <!-- <router-link :to="append($route.path,'')" tag="button">foo</router-link> -->
       </div>
     </div>
