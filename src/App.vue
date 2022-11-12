@@ -25,7 +25,11 @@ onMounted(() => {
       </nav> -->
       </div>
     </header>
-    <RouterView v-if="!loading" style="min-height: 75vh" />
+    <RouterView v-if="!loading" style="min-height: 75vh" v-slot="{ Component }">
+      <transition name="route" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </RouterView>
   </div>
 </template>
 
@@ -35,6 +39,28 @@ onMounted(() => {
   flex-direction: column;
   min-width: 85vw;
 }
+
+// route transitions
+.route-enter-from {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.round-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.route-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.route-leave-active {
+  transition: all 0.3s ease-in;
+
+}
+
+
 @media (min-width: 1024px) {
 }
 </style>

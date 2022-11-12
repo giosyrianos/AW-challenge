@@ -48,6 +48,17 @@ const goToPost = (postId) => {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.2rem;
+  animation: fadeInAnimation ease 0.7s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  @keyframes fadeInAnimation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 }
 
 @media (min-width: 760px) {
@@ -59,5 +70,22 @@ const goToPost = (postId) => {
     overflow-y: auto;
     padding: 1rem;
   }
+}
+
+// Fade transition
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: all 0.8s ease-out;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-leave-active {
+  transition: all 0.8s ease-in;
 }
 </style>
