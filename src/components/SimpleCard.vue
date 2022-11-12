@@ -28,6 +28,14 @@ const props = defineProps({
   },
 });
 
+// Emits
+const emit = defineEmits(["selection"]);
+
+// Methods
+const onSelection = () => {
+  emit("selection");
+};
+
 onMounted(() => {
   console.log("card mounted");
 });
@@ -41,7 +49,9 @@ onMounted(() => {
         {{ body }}
       </p>
       <div class="actions d-flex justify-content-end">
-        <a href="#" class="btn btn-info shadow">Read More</a>
+        <a href="#" class="btn btn-info shadow" @click="onSelection()"
+          >Read More</a
+        >
         <!-- <router-link :to="append($route.path,'')" tag="button">foo</router-link> -->
       </div>
     </div>

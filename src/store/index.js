@@ -16,8 +16,15 @@ const store = createStore({
       commit("SET_LOADING", true);
       const response = await PostDataService.getPosts(page);
       commit("SET_LOADING", false);
-      console.log(response.data);
       commit("SET_POSTLIST", response.data);
+    },
+
+    async getPost({ commit }, id) {
+      // commit("SET_LOADING", true);
+      const response = await PostDataService.getSinglePost(id);
+      // commit("SET_LOADING", false);
+      console.log(response.data);
+      commit("SET_SELECTED_POST", response.data);
     },
   },
 
@@ -28,10 +35,14 @@ const store = createStore({
     SET_POSTLIST(state, postList) {
       state.postList = postList;
     },
+    SET_SELECTED_POST(state, selectedPost) {
+      state.selectedPost = selectedPost;
+    },
   },
 
   getters: {
-    loadPostList: (state) => state.postList,
+		loadPostList: (state) => state.postList,
+		loadSelectedPost: (state) => state.selectedPost,
   },
 });
 

@@ -1,10 +1,16 @@
 <script setup>
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import SimpleCard from "@/components/SimpleCard.vue";
 
 const store = useStore();
 const posts = computed(() => store.getters.loadPostList);
+const router = useRouter();
+// Methods
+const goToPost = (postId) => {
+  router.push({ name: "post", params: { id: postId } });
+};
 </script>
 
 <template>
@@ -20,6 +26,7 @@ const posts = computed(() => store.getters.loadPostList);
             :user_id="post.user_id"
             :title="post.title"
             :body="post.body"
+            @selection="goToPost(post.id)"
           />
         </div>
         <div class="row">
