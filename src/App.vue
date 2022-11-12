@@ -16,7 +16,7 @@ onMounted(() => {
     <header>
       <div class="wrapper">
         <h1 class="text-info">My Dashboard</h1>
-        <div v-if="loading" class="spinner-border text-info" role="status">
+        <div v-if="loading" class="spinner-border mx-auto text-info" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
         <!-- <nav>
@@ -30,6 +30,11 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-width: 85vw;
+}
 @media (min-width: 1024px) {
 }
 </style>

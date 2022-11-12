@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from "vue";
 // Props
+// eslint-disable-next-line no-unused-vars
 const props = defineProps({
   id: {
     type: Number,

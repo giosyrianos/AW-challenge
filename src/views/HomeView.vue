@@ -3,6 +3,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import SimpleCard from "@/components/SimpleCard.vue";
+import Pagination from "@/components/Pagination.vue";
 
 const store = useStore();
 const posts = computed(() => store.getters.loadPostList);
@@ -30,40 +31,7 @@ const goToPost = (postId) => {
           />
         </div>
         <div class="row">
-          <nav
-            class="d-flex justify-content-center mt-2"
-            aria-label="Page navigation example"
-          >
-            <ul class="pagination">
-              <li class="page-item">
-                <a
-                  class="page-link bg-secondary text-light"
-                  href="#"
-                  aria-label="Previous"
-                >
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link bg-secondary text-light" href="#">1</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link bg-secondary text-light" href="#">2</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link bg-secondary text-light" href="#">3</a>
-              </li>
-              <li class="page-item">
-                <a
-                  class="page-link bg-secondary text-light"
-                  href="#"
-                  aria-label="Next"
-                >
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <Pagination :pages="4" />
         </div>
       </div>
       <div class="row">
