@@ -15,11 +15,9 @@ onMounted(() => {
   <div>
     <header>
       <div class="wrapper">
-        <h1 class="text-info">My Dashboard</h1>
-        <!-- <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav> -->
+        <h1 class="text-info">
+          <RouterLink to="/" class="text-info">My Dashboard</RouterLink>
+        </h1>
       </div>
     </header>
     <RouterView style="min-height: 75vh" v-slot="{ Component }">
