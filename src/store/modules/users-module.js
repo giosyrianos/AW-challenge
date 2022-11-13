@@ -16,7 +16,6 @@ export default {
       const response = await UserDataService.getUsers();
       commit("SET_LOADING", false);
       commit("SET_USERLIST", response.data);
-      console.log(response.data);
     },
   },
 
