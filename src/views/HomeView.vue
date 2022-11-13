@@ -26,12 +26,15 @@ const userSelected = (user) => {
   setTimeout(() => {
     disabled.value = false;
   }, 1500);
-  console.log(user);
   selectedUser.value = user;
 };
 
 const goToPost = (postId) => {
   router.push({ name: "post", params: { id: postId } });
+};
+
+const goToUser = (userId) => {
+	router.push({ name: "user", params: { id: userId } });
 };
 
 const updateTask = (task) => {
@@ -83,7 +86,7 @@ const updateTask = (task) => {
               :title="selectedUser.name"
               :body="selectedUser.email"
               :btn-label="`User Details`"
-              @card-selected="goToPost(selectedUser.id)"
+              @card-selected="goToUser(selectedUser.id)"
             >
               <ul class="list-unstyled">
                 <li>{{ selectedUser.gender }}</li>
@@ -93,7 +96,7 @@ const updateTask = (task) => {
           </div>
           <div class="todos-list">
             <TaskList
-              v-if="todos.length"
+              v-if="todos.length && selectedUser"
               :list="todos"
               :class="{ refresh: disabled }"
               @status-change="updateTask($event)"
