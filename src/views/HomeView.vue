@@ -1,13 +1,22 @@
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import SimpleCard from "@/components/SimpleCard.vue";
+import SimpleSelect from "@/components/SimpleSelect.vue";
 import Pagination from "@/components/Pagination.vue";
 
 const store = useStore();
 const posts = computed(() => store.getters["postsModule/loadPostList"]);
+const users = computed(() => store.getters["usersModule/loadUserList"]);
 const router = useRouter();
+
+const selectedUser = ref(null);
+const userSelected = (user) => {
+  console.log(user);
+  selectedUser.value = user;
+};
+
 // Methods
 const goToPost = (postId) => {
   router.push({ name: "post", params: { id: postId } });
@@ -35,8 +44,16 @@ const goToPost = (postId) => {
         </div>
       </div>
       <div class="row">
-        <h4 class="secondary">My Todos</h4>
-        <div>Todos here</div>
+        <h4 class="secondary">User's Todos</h4>
+        <div class="select-container">
+          <SimpleSelect
+            :options="users"
+            :displayProperty="'name'"
+            placeholder="Please select a User"
+            @selection="userSelected"
+          />
+          <p>{{ selectedUser }}</p>
+        </div>
       </div>
     </div>
   </main>

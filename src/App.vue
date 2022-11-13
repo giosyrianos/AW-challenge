@@ -8,6 +8,7 @@ const loading = computed(() => store.state.postsModule.loading);
 
 onMounted(() => {
   store.dispatch("postsModule/getPosts");
+  store.dispatch("usersModule/getUsers");
 });
 </script>
 
