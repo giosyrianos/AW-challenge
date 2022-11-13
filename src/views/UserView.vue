@@ -10,7 +10,6 @@ const loading = computed(() => store.state.usersModule.singleUserloading);
 const user = computed(() => store.getters["usersModule/loadSelectedUser"]);
 
 onMounted(() => {
-  console.log([user]);
   store.dispatch("usersModule/getUser", route.params.id);
 });
 </script>

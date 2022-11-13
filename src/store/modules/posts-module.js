@@ -24,7 +24,6 @@ export default {
       commit("SET_Single_LOADING", true);
       const response = await PostDataService.getSinglePost(id);
       commit("SET_Single_LOADING", false);
-      console.log(response.data);
       commit("SET_SELECTED_POST", response.data);
     },
     async goToPostPage({ commit }, page) {

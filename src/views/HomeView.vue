@@ -34,7 +34,7 @@ const goToPost = (postId) => {
 };
 
 const goToUser = (userId) => {
-	router.push({ name: "user", params: { id: userId } });
+  router.push({ name: "user", params: { id: userId } });
 };
 
 const updateTask = (task) => {
