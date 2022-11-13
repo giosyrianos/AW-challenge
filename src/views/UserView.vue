@@ -18,7 +18,12 @@ onMounted(() => {
   <div class="container">
     <div class="row single-user">
       <div class="col-12">
-        <h4>User details</h4>
+        <h4 class="d-flex w-100 justify-content-between">
+          User details
+          <button class="btn btn-outline-secondary" @click="$router.push('/')">
+            🏠
+          </button>
+        </h4>
         <h2 class="text-light" v-if="!loading">{{ user.name }}</h2>
       </div>
       <div class="row">

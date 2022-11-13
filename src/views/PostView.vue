@@ -10,7 +10,6 @@ const loading = computed(() => store.state.postsModule.singlePostloading);
 const post = computed(() => store.getters["postsModule/loadSelectedPost"]);
 
 onMounted(() => {
-  console.log([post]);
   store.dispatch("postsModule/getPost", route.params.id);
 });
 </script>
@@ -19,7 +18,12 @@ onMounted(() => {
   <div class="container">
     <div class="row single-post">
       <div class="col-12">
-        <h4>Post</h4>
+        <h4 class="d-flex w-100 justify-content-between">
+          Post
+          <button class="btn btn-outline-secondary" @click="$router.push('/')">
+            🏠
+          </button>
+        </h4>
         <h2 class="text-light" v-if="!loading">{{ post.title }}</h2>
       </div>
       <div class="row">
