@@ -8,6 +8,7 @@ export default {
       userList: [],
       selectedUser: {},
       loading: false,
+      singleUserloading: false,
       userTasks: [],
     };
   },
@@ -18,6 +19,12 @@ export default {
       const response = await UserDataService.getUsers();
       commit("SET_LOADING", false);
       commit("SET_USERLIST", response.data);
+    },
+    async getUser({ commit }, id) {
+      commit("SET_singleUser_LOADING", true);
+      const response = await UserDataService.getUser(id);
+      commit("SET_singleUser_LOADING", false);
+      commit("SET_SELECTED_USER", response.data);
     },
     async getUserTasks({ commit }, id) {
       const response = await TasksDataService.getUserTasks(id);
@@ -39,11 +46,17 @@ export default {
     SET_LOADING(state, payload) {
       state.loading = payload;
     },
+    SET_singleUser_LOADING(state, payload) {
+      state.singleUserloading = payload;
+    },
     SET_USERLIST(state, userList) {
       state.userList = userList;
     },
     SET_USER_TASKS(state, userTasks) {
       state.userTasks = [...userTasks];
+    },
+    SET_SELECTED_USER(state, selectedUser) {
+      state.selectedUser = selectedUser;
     },
     // eslint-disable-next-line no-unused-vars
     UPDATE_TASK(state, task) {
@@ -55,5 +68,6 @@ export default {
   getters: {
     loadUserList: (state) => state.userList,
     loadUserTasks: (state) => state.userTasks,
+    loadSelectedUser: (state) => state.selectedUser,
   },
 };
