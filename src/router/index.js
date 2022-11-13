@@ -10,8 +10,8 @@ const router = createRouter({
       component: HomeView,
     },
     {
-			path: "/post/:id",
-			name: "post",
+      path: "/post/:id",
+      name: "post",
       component: () => import("../views/PostView.vue"),
     },
     // {
