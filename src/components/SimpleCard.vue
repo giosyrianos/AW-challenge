@@ -30,7 +30,7 @@ const props = defineProps({
 });
 
 // Emits
-const emit = defineEmits(["selection"]);
+const emit = defineEmits(["card-selected"]);
 
 // Methods
 const onSelection = () => {
