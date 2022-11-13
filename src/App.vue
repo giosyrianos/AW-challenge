@@ -1,10 +1,9 @@
 <script setup>
-import { computed, onMounted } from "vue";
+import { onMounted } from "vue";
 import { RouterView } from "vue-router";
 import { useStore } from "vuex";
 
 const store = useStore();
-const loading = computed(() => store.state.postsModule.loading);
 
 onMounted(() => {
   store.dispatch("postsModule/getPosts");
@@ -17,20 +16,13 @@ onMounted(() => {
     <header>
       <div class="wrapper">
         <h1 class="text-info">My Dashboard</h1>
-        <div
-          v-if="loading"
-          class="spinner-border mx-auto text-info"
-          role="status"
-        >
-          <span class="visually-hidden">Loading...</span>
-        </div>
         <!-- <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav> -->
       </div>
     </header>
-    <RouterView v-if="!loading" style="min-height: 75vh" v-slot="{ Component }">
+    <RouterView style="min-height: 75vh" v-slot="{ Component }">
       <transition name="route" mode="out-in">
         <component :is="Component" />
       </transition>

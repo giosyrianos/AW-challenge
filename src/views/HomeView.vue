@@ -6,7 +6,7 @@ import SimpleCard from "@/components/SimpleCard.vue";
 import SimpleSelect from "@/components/SimpleSelect.vue";
 import Pagination from "@/components/Pagination.vue";
 import TaskList from "@/components/TaskList.vue";
-
+import LoadSpinner from "@/components/LoadSpinner.vue";
 // Data
 const selectedUser = ref(null);
 const disabled = ref(false);
@@ -16,6 +16,7 @@ const store = useStore();
 const posts = computed(() => store.getters["postsModule/loadPostList"]);
 const users = computed(() => store.getters["usersModule/loadUserList"]);
 const todos = computed(() => store.getters["usersModule/loadUserTasks"]);
+const postsLoading = computed(() => store.state.postsModule.loading);
 const router = useRouter();
 
 // Methods
@@ -44,9 +45,9 @@ const updateTask = (task) => {
 <template>
   <main>
     <div class="container pb-5">
-      <div class="row mb-3">
+      <div class="row mb-3 maintain-height">
         <h4 class="secondary">Latest Posts</h4>
-        <div class="cards-container fade-in">
+        <div class="cards-container fade-in" v-show="!postsLoading">
           <SimpleCard
             v-for="post in posts"
             :key="post.id"
@@ -58,7 +59,8 @@ const updateTask = (task) => {
             @card-selected="goToPost(post.id)"
           />
         </div>
-        <div class="row">
+        <LoadSpinner v-show="postsLoading" />
+        <div class="row" v-show="!postsLoading">
           <Pagination :pages="4" />
         </div>
       </div>
@@ -96,7 +98,9 @@ const updateTask = (task) => {
               :class="{ refresh: disabled }"
               @status-change="updateTask($event)"
             />
-            <p v-else class="text-center">No tasks for this user</p>
+            <p v-if="!todos.length && selectedUser" class="text-center">
+              No tasks for this user
+            </p>
           </div>
         </div>
       </div>
@@ -140,6 +144,10 @@ const updateTask = (task) => {
   .cards-container {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     height: 320px;
+  }
+
+  .maintain-height {
+    min-height: 320px;
   }
 
   .todos-container {
