@@ -27,8 +27,7 @@ export default {
       console.log(response.data);
       commit("SET_SELECTED_POST", response.data);
     },
-		async goToPostPage({ commit }, page) {
-			console.log('goToPostPage', page)
+    async goToPostPage({ commit }, page) {
       commit("SET_POST_PAGE", page);
       this.dispatch("postsModule/getPosts");
     },
