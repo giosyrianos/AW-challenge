@@ -11,10 +11,10 @@ const props = defineProps({
 });
 
 const store = useStore();
-const currentPage = computed(() => store.getters.currentPage);
+const currentPage = computed(() => store.getters["postsModule/currentPage"]);
 
 const goToPage = (page) => {
-  store.dispatch("goToPostPage", page);
+  store.dispatch("postsModule/goToPostPage", page);
 };
 </script>
 

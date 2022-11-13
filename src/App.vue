@@ -4,10 +4,10 @@ import { RouterView } from "vue-router";
 import { useStore } from "vuex";
 
 const store = useStore();
-const loading = computed(() => store.state.loading);
+const loading = computed(() => store.state.postsModule.loading);
 
 onMounted(() => {
-  store.dispatch("getPosts");
+  store.dispatch("postsModule/getPosts");
 });
 </script>
 
@@ -61,9 +61,7 @@ onMounted(() => {
 
 .route-leave-active {
   transition: all 0.3s ease-in;
-
 }
-
 
 @media (min-width: 1024px) {
 }

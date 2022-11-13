@@ -6,7 +6,7 @@ import SimpleCard from "@/components/SimpleCard.vue";
 import Pagination from "@/components/Pagination.vue";
 
 const store = useStore();
-const posts = computed(() => store.getters.loadPostList);
+const posts = computed(() => store.getters["postsModule/loadPostList"]);
 const router = useRouter();
 // Methods
 const goToPost = (postId) => {

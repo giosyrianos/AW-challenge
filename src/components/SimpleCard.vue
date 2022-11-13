@@ -38,7 +38,7 @@ const onSelection = () => {
 };
 
 onMounted(() => {
-  console.log("card mounted");
+  // console.log("card mounted");
 });
 </script>
 

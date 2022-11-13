@@ -6,12 +6,12 @@ import { useStore } from "vuex";
 const route = useRoute();
 const store = useStore();
 
-const loading = computed(() => store.state.singlePostloading);
-const post = computed(() => store.getters.loadSelectedPost);
+const loading = computed(() => store.state.postsModule.singlePostloading);
+const post = computed(() => store.getters["postsModule/loadSelectedPost"]);
 
 onMounted(() => {
   console.log([post]);
-  store.dispatch("getPost", route.params.id);
+  store.dispatch("postsModule/getPost", route.params.id);
 });
 </script>
 
