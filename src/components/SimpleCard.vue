@@ -91,4 +91,8 @@ onMounted(() => {
     height: 1rem;
   }
 }
+
+.actions {
+  margin-top: 2rem;
+}
 </style>

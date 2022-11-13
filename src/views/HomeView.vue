@@ -66,8 +66,8 @@ const goToPost = (postId) => {
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    height: 30vh;
-    overflow-y: auto;
+    height: 320px;
+    overflow-y: hidden;
     padding: 1rem;
   }
 }
