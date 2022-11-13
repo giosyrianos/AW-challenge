@@ -34,7 +34,7 @@ const selectionMade = () => {
   <select
     class="form-select bg-secondary"
     aria-label="Default select example"
-    style="width: 320px; color: #fff"
+    style="width: 100%; color: #fff"
     @change="selectionMade()"
     v-model="selection"
   >

@@ -19,9 +19,9 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  link: {
+  btnLabel: {
     type: String,
-    required: false,
+    required: true,
   },
   checked: {
     type: Boolean,
@@ -34,7 +34,7 @@ const emit = defineEmits(["selection"]);
 
 // Methods
 const onSelection = () => {
-  emit("selection");
+  emit("card-selected");
 };
 
 onMounted(() => {
@@ -45,13 +45,22 @@ onMounted(() => {
 <template>
   <div class="card bg-secondary bg-gradient p-1">
     <div class="card-body">
-      <h5 class="card-title text-info text-overflow fade2">{{ title }}</h5>
-      <p class="card-text text-overflow fade2">
+      <h5
+        class="card-title text-info fade2"
+        :class="{ 'text-overflow': title.length > 50 }"
+      >
+        {{ title }}
+      </h5>
+      <p
+        class="card-text fade2"
+        :class="{ 'text-overflow': body.length > 200 }"
+      >
         {{ body }}
       </p>
+      <slot />
       <div class="actions d-flex justify-content-end">
         <button href="#" class="btn btn-info shadow" @click="onSelection()">
-          Read More
+          {{ btnLabel }}
         </button>
         <!-- <router-link :to="append($route.path,'')" tag="button">foo</router-link> -->
       </div>

@@ -11,8 +11,14 @@ const posts = computed(() => store.getters["postsModule/loadPostList"]);
 const users = computed(() => store.getters["usersModule/loadUserList"]);
 const router = useRouter();
 
+// TODO - remove this
 const selectedUser = ref(null);
+const disabled = ref(false);
 const userSelected = (user) => {
+  disabled.value = true;
+  setTimeout(() => {
+    disabled.value = false;
+  }, 1500);
   console.log(user);
   selectedUser.value = user;
 };
@@ -28,7 +34,7 @@ const goToPost = (postId) => {
     <div class="container">
       <div class="row mb-3">
         <h4 class="secondary">Latest Posts</h4>
-        <div class="cards-container">
+        <div class="cards-container fade-in">
           <SimpleCard
             v-for="post in posts"
             :key="post.id"
@@ -36,23 +42,44 @@ const goToPost = (postId) => {
             :user_id="post.user_id"
             :title="post.title"
             :body="post.body"
-            @selection="goToPost(post.id)"
+            :btn-label="`Read More`"
+            @card-selected="goToPost(post.id)"
           />
         </div>
         <div class="row">
           <Pagination :pages="4" />
         </div>
       </div>
-      <div class="row">
+      <div class="row mb-3">
         <h4 class="secondary">User's Todos</h4>
-        <div class="select-container">
-          <SimpleSelect
-            :options="users"
-            :displayProperty="'name'"
-            placeholder="Please select a User"
-            @selection="userSelected"
-          />
-          <p>{{ selectedUser }}</p>
+        <div class="todos-container">
+          <div class="user-selection">
+            <SimpleSelect
+              :options="users"
+              :displayProperty="'name'"
+              placeholder="Please select a User"
+              @selection="userSelected"
+            />
+          </div>
+          <div class="user-info fade-in" v-if="selectedUser">
+            <SimpleCard
+              :class="{ refresh: disabled }"
+              :id="selectedUser.id"
+              :user_id="selectedUser.id"
+              :title="selectedUser.name"
+              :body="selectedUser.email"
+              :btn-label="`User Details`"
+              @card-selected="goToPost(selectedUser.id)"
+            >
+              <ul class="list-unstyled">
+                <li>{{ selectedUser.gender }}</li>
+                <li>{{ selectedUser.status }}</li>
+              </ul>
+            </SimpleCard>
+          </div>
+          <div class="todos-list" style="border: 2px solid limegreen">
+						<p>TODOS here</p>
+					</div>
         </div>
       </div>
     </div>
@@ -60,11 +87,16 @@ const goToPost = (postId) => {
 </template>
 
 <style lang="scss" scoped>
-.cards-container {
+.cards-container,
+.todos-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.2rem;
+}
+
+.fade-in,
+.refresh {
   animation: fadeInAnimation ease 0.7s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
@@ -79,14 +111,46 @@ const goToPost = (postId) => {
 }
 
 @media (min-width: 760px) {
-  .cards-container {
+  .cards-container,
+  .todos-container {
     display: grid;
     grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    height: 320px;
     overflow-y: hidden;
     padding: 1rem;
   }
+
+  .cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    height: 320px;
+  }
+
+  .todos-container {
+    grid-template-columns: minmax(250px, 30%) 1fr;
+    grid-template-rows: auto 1fr;
+    height: auto;
+
+    .user-selection {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .user-info {
+      grid-column: 1;
+    }
+
+    .todos-list {
+      grid-column: 2;
+    }
+
+    .user-info,
+    .todos-list {
+      grid-row: 2;
+    }
+  }
+}
+
+.user-info li {
+  text-transform: capitalize;
 }
 
 // Fade transition
