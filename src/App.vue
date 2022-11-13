@@ -16,7 +16,11 @@ onMounted(() => {
     <header>
       <div class="wrapper">
         <h1 class="text-info">My Dashboard</h1>
-        <div v-if="loading" class="spinner-border mx-auto text-info" role="status">
+        <div
+          v-if="loading"
+          class="spinner-border mx-auto text-info"
+          role="status"
+        >
           <span class="visually-hidden">Loading...</span>
         </div>
         <!-- <nav>
