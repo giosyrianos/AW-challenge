@@ -17,6 +17,7 @@ const posts = computed(() => store.getters["postsModule/loadPostList"]);
 const users = computed(() => store.getters["usersModule/loadUserList"]);
 const todos = computed(() => store.getters["usersModule/loadUserTasks"]);
 const postsLoading = computed(() => store.state.postsModule.loading);
+const tasksLoading = computed(() => store.state.usersModule.loading);
 const router = useRouter();
 
 // Methods
@@ -94,7 +95,7 @@ const updateTask = (task) => {
               </ul>
             </SimpleCard>
           </div>
-          <div class="todos-list">
+          <div class="todos-list" v-show="!tasksLoading">
             <TaskList
               v-if="todos.length && selectedUser"
               :list="todos"
@@ -105,6 +106,7 @@ const updateTask = (task) => {
               No tasks for this user
             </p>
           </div>
+          <LoadSpinner v-show="tasksLoading" />
         </div>
       </div>
     </div>

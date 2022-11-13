@@ -15,9 +15,7 @@ export default {
 
   actions: {
     async getUsers({ commit }) {
-      commit("SET_LOADING", true);
       const response = await UserDataService.getUsers();
-      commit("SET_LOADING", false);
       commit("SET_USERLIST", response.data);
     },
     async getUser({ commit }, id) {
@@ -27,8 +25,9 @@ export default {
       commit("SET_SELECTED_USER", response.data);
     },
     async getUserTasks({ commit }, id) {
+      commit("SET_LOADING", true);
       const response = await TasksDataService.getUserTasks(id);
-      console.log(response.data);
+      commit("SET_LOADING", false);
       commit("SET_USER_TASKS", response.data);
     },
     // eslint-disable-next-line no-unused-vars
