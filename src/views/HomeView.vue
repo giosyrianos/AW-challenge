@@ -5,17 +5,19 @@ import { useRouter } from "vue-router";
 import SimpleCard from "@/components/SimpleCard.vue";
 import SimpleSelect from "@/components/SimpleSelect.vue";
 import Pagination from "@/components/Pagination.vue";
+import TaskList from "@/components/TaskList.vue";
 
 const store = useStore();
 const posts = computed(() => store.getters["postsModule/loadPostList"]);
 const users = computed(() => store.getters["usersModule/loadUserList"]);
+const todos = computed(() => store.getters["usersModule/loadUserTasks"]);
 const router = useRouter();
 
-// TODO - remove this
 const selectedUser = ref(null);
 const disabled = ref(false);
 const userSelected = (user) => {
   disabled.value = true;
+  store.dispatch("usersModule/getUserTasks", user.id);
   setTimeout(() => {
     disabled.value = false;
   }, 1500);
@@ -27,11 +29,18 @@ const userSelected = (user) => {
 const goToPost = (postId) => {
   router.push({ name: "post", params: { id: postId } });
 };
+
+const updateTask = (task) => {
+  task.status === "completed"
+    ? (task.status = "pending")
+    : (task.status = "completed");
+  store.dispatch("usersModule/updateTask", task);
+};
 </script>
 
 <template>
   <main>
-    <div class="container">
+    <div class="container pb-5">
       <div class="row mb-3">
         <h4 class="secondary">Latest Posts</h4>
         <div class="cards-container fade-in">
@@ -77,9 +86,15 @@ const goToPost = (postId) => {
               </ul>
             </SimpleCard>
           </div>
-          <div class="todos-list" style="border: 2px solid limegreen">
-						<p>TODOS here</p>
-					</div>
+          <div class="todos-list">
+            <TaskList
+              v-if="todos.length"
+              :list="todos"
+              :class="{ refresh: disabled }"
+              @status-change="updateTask($event)"
+            />
+            <p v-else class="text-center">No tasks for this user</p>
+          </div>
         </div>
       </div>
     </div>
