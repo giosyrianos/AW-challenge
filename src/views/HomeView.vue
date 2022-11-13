@@ -7,14 +7,18 @@ import SimpleSelect from "@/components/SimpleSelect.vue";
 import Pagination from "@/components/Pagination.vue";
 import TaskList from "@/components/TaskList.vue";
 
+// Data
+const selectedUser = ref(null);
+const disabled = ref(false);
+
+// Computed
 const store = useStore();
 const posts = computed(() => store.getters["postsModule/loadPostList"]);
 const users = computed(() => store.getters["usersModule/loadUserList"]);
 const todos = computed(() => store.getters["usersModule/loadUserTasks"]);
 const router = useRouter();
 
-const selectedUser = ref(null);
-const disabled = ref(false);
+// Methods
 const userSelected = (user) => {
   disabled.value = true;
   store.dispatch("usersModule/getUserTasks", user.id);
@@ -25,7 +29,6 @@ const userSelected = (user) => {
   selectedUser.value = user;
 };
 
-// Methods
 const goToPost = (postId) => {
   router.push({ name: "post", params: { id: postId } });
 };
